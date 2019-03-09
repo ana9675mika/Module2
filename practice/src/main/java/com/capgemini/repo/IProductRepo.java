@@ -13,6 +13,6 @@ public interface IProductRepo {
 	public List<Product> getProductList();
 public Product removeProduct(int productid);
 
-public List<Product> getProductByBrand(String brand);
+public List<String> getProductByBrand(String brand);
 public List<Product> getProductByPriceRange(float min,float max);
 }

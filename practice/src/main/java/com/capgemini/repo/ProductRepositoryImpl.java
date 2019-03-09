@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -65,21 +66,21 @@ public class ProductRepositoryImpl implements IProductRepo {
 	}
 
 	@Override
-	public List<Product> getProductByBrand(String brand) {
-		TypedQuery query=entityManager.
-				createQuery("SELECT productName FROM Product WHERE brand=:?1",Product.class);
-		query.setParameter(1, brand);
-		List<Product> list=query.getResultList();
+	public List<String> getProductByBrand(String brand) {
+		Query query=entityManager.
+				createQuery("SELECT p.productName FROM Product p WHERE brand=:brand");
+		query.setParameter("brand", brand);
+		List<String> list=query.getResultList();
 		return list;
 	}
 
 	@Override
 	public List<Product> getProductByPriceRange(float min, float max) {
-		TypedQuery query=entityManager.
-				createQuery("SELECT p.productName FROM Product p WHERE price BETWEEN ?1 AND ?2",Product.class);
-		query.setParameter(1, min);
-		query.setParameter(2, max);
-		List<Product> list=query.getResultList();
+		String selAllQuery="SELECT p FROM Product p WHERE price BETWEEN :min AND :max";
+		TypedQuery<Product> tq=entityManager.createQuery(selAllQuery,Product.class);
+		tq.setParameter("min", min);
+		tq.setParameter("max", max);
+		List<Product> list=tq.getResultList();
 		return list;
 	}
 

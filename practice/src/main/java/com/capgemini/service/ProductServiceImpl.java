@@ -56,7 +56,7 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 	@Override
-	public List<Product> getProductByBrand(String brand) {
+	public List<String> getProductByBrand(String brand) {
 		// TODO Auto-generated method stub
 		return repo.getProductByBrand(brand);
 	}

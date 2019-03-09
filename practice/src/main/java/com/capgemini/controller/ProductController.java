@@ -66,9 +66,9 @@ public class ProductController {
    }
 	
 	@RequestMapping(value="/getProductListByBrand/{brand}",produces="application/json")
-	public List<Product> getProductListByBrand(@PathVariable String brand)
+	public List<String> getProductListByBrand(@PathVariable String brand)
 	{ 
-	List<Product> list=service.getProductByBrand(brand);
+	List<String> list=service.getProductByBrand(brand);
 	return list;
    }
 	
